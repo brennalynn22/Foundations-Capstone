@@ -10,7 +10,7 @@ const recipeCallback =({data:recipes}) => displayRecipes(recipes)
 const errCallback = err => console.log(err.response.data)
 
 const getAllRecipes = () => axios.get(baseURL).then(recipeCallback).catch(errCallback)
-const createRecipe = body => axios.post(baseURL, body).then(recipeCallback).catch(errCallback)
+const createRecipe = body => axios.post(baseURL, body).then(recipeCallback).catch((err)=>alert(err))
 const deleteRecipe = id => axios.delete(`${baseURL}/${id}`).then(recipeCallback).catch(errCallback)
 
 function submitHandler(e){
@@ -30,18 +30,18 @@ function submitHandler(e){
         directions: directions.value
 
     }
-    if (name.value === null) {
-        alert ('You must enter a name')
-        return
-    } 
-    if (ingredients.value === null){
-        alert ('You must enter the ingredients')
-        return
-    }
-    if (directions.value === null){
-        alert ('You must enter directions')
-        return
-    }
+    // if (name.value === null) {
+    //     alert ('You must enter a name')
+    //     return
+    // } 
+    // if (ingredients.value === null){
+    //     alert ('You must enter the ingredients')
+    //     return
+    // }
+    // if (directions.value === null){
+    //     alert ('You must enter directions')
+    //     return
+    // }
     createRecipe(bodyObj)
 
     name.value =''
@@ -55,19 +55,22 @@ function createRecipeCard(recipe) {
     recipeCard.classList.add('recipe-card')
 
     recipeCard.innerHTML = `<div class="recipeBody">
-    <p id="name2">${recipe.name}</p>
-    <p id="creator2">${recipe.creator}</p>
+    <p id="name2"><span id="title2">Recipe:   </span>${recipe.name}</p>
+    <p id="creator2"><span id="from2">From:   </span>${recipe.creator}</p>
+    <p id="ingredientsTemplate">Ingredients:</p>
     <p id="ingredients2">${recipe.ingredients}</p>
-    <p id="directons2">${recipe.directions}</p>
+    <p id="directionsTemplate">Directions:</p>
+    <p id="directions2">${recipe.directions}</p>
     </div>
+    <div id="commentSection"></div>
     <div class="btns-container">
-        <button id="editBtn" type="button">Edit Recipe</button>
-        <button id="commentBtn" typr="button">Comment</button>
+        <button class="btns-container" id="editBtn-${recipe.id}" type="button">Edit Recipe</button>
+        <button id="commentBtn" onclick="addComment()">Comment</button>
         <button onclick="deleteRecipe(${recipe.id})">Delete</button>
-
     </div> 
     `
     recipeContainer.appendChild(recipeCard)
+    editBtn()
 }
 
 function displayRecipes(arr){
@@ -78,12 +81,16 @@ function displayRecipes(arr){
 }
 form.addEventListener('submit', submitHandler)
 
-getAllRecipes()
 
-const editBtn= document.getElementById('editBtn');
+function editBtn() {
+
+
+const editBtn= document.querySelector('#editBtn-1');
 const editables = document.querySelectorAll('#name2, #creator2, #ingredients2, #directions2')
-
-editBtn.addEventListener('click', function(e) {
+console.log(editBtn)
+if(editBtn){
+editBtn.addEventListener('click', (e)=> {
+    console.log(e.target)
    if (!editables[0].isContentEditable) {
     editables[0].contentEditable = 'true';
     editables[1].contentEditable = 'true';
@@ -91,6 +98,8 @@ editBtn.addEventListener('click', function(e) {
     editables[3].contentEditable = 'true';
     editBtn.innerHTML = 'Save Changes';
     editBtn.style.backgroundColor ='rgb(61,61,91)';
+    editBtn.style.color= "rgb(244,241,222)";
+
    } else {
     //disable editing
     editables[0].contentEditable = 'false';
@@ -98,7 +107,7 @@ editBtn.addEventListener('click', function(e) {
     editables[2].contentEditable = 'false';
     editables[3].contentEditable = 'false';
     //change button text and color
-    editBtn.innerHTML= "Edit";
+    editBtn.innerHTML= "Edit Recipe";
     editBtn.style.backgroundColor = 'rgb(129,178,154)';
     //save the data in localStorage 
     for (let i=0; i<editables.length;i++){
@@ -107,6 +116,16 @@ editBtn.addEventListener('click', function(e) {
 
    }
 
-},
-)
+}
+)}}
 
+function addComment (){
+    const x= document.getElementById("commentSection");
+    if (x.style.display === "none"){
+        x.style.display = "block";
+    } else { 
+        x.style.display = "none";
+
+    }
+}
+getAllRecipes()

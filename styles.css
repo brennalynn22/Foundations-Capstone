@@ -6,16 +6,17 @@ body {
 .headerBox {
     margin:0px;
     padding:0px;
-    height:100px;
+    height:150px;
     background-color: rgb(129,178,154)
 }
 #title {
     margin:0px;
+    padding: 40px;
     text-align: center;
     justify-content: center;
     color: rgb(61,61,91);
-    font-size:50px;
-    font-weight:700;
+    font-size:70px;
+    font-weight:800;
     font-family: "Courier New"
 }
 
@@ -24,18 +25,38 @@ body {
     display: flex;
     justify-content:center;
 
+    
+
+
 }
 form {
     margin:20px;
-    width:500px;
-    height: 300px;
+    width:600px;
+    height: 400px;
     background-color: rgb(242,204,143);
-    position: center; 
+    position: center;
+    display: inline-block; 
     display: flex;
     flex-direction: column;
     justify-content: space-evenly; 
     align-items: center;
     border-radius:10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+input{
+    width:400px;
+}
+textarea {
+    width:400px;
+    height:70px;
+   
+}
+label{
+    font-family: 'Courier New', Courier, monospace;
+    clear: both;
+    float:left;
+    margin-right:15px
+
 }
 
 button {
@@ -47,6 +68,8 @@ button {
     color:rgb(61,61,91);
     font-family: "Courier New";
     font-weight: 550;
+    position: center;
+    justify-content:space-evenly;
 
 
 }
@@ -59,10 +82,61 @@ button {
 
 .recipe-card {
     margin:10px;
-    width:400px;
-    height: 300px;
+    padding: 15px;
+    width:500px;
+
     background-color: rgb(242,204,143);
     border-radius:10px;
     flex-direction: column;
     align-items: center;
+}
+#title2{
+    font-family: "Courier New";
+    font-weight: 500;
+    font-size: 35px;
+    
+}
+#name2 {
+    font-family: "Courier New";
+    font-weight: 600;
+    font-size: large;
+    line-height: normal;
+    
+}
+#creator2 { 
+    font-family: "Courier New";
+    font-weight: 500;
+    font-size: large;    
+}
+#from2{
+    font-family: "Courier New";
+    font-weight: 500;
+    font-size: x-large;
+}
+#ingredientsTemplate {
+    font-family: "Courier New";
+    font-weight: 500;
+    font-size: 15px;
+}
+#directionsTemplate {
+    font-family: "Courier New";
+    font-weight: 500;
+    font-size: 15px;
+}
+
+#ingredients2 {
+    column-count:0;
+    font-family:'Courier New';
+    font-size:15px;
+}
+#directions2 {
+    column-count:0;
+    font-family:'Courier New';
+    font-size:15px;
+
+}
+
+.btns-container {
+    justify-content: space-evenly;
+
 }
