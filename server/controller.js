@@ -31,7 +31,26 @@ module.exports = {
         let index =recipes.findIndex(elem => elem.id=== +req.params.id)
         recipes.splice(index, 1);
         res.status(200).send(recipes)
-    }
+    },
 
-    
+    updateComment: (req, res) => {
+////select id and edit property
+     let index =recipes.findIndex(elem => elem.id=== +req.params.id)
+     let newComment =req.body.comments
+     console.log(req.body)
+     for (let i=0;i<recipes.length; i++){
+            if (recipes[index].comments===''){
+                recipes[index].comments += newComment
+            } else {
+                recipes[index].comments +=", " + newComment
+            }
+
+            
+            console.log(recipes[index])
+            res.status(200).send(recipes)
+            return
+        
+     } 
+     res.status(400).send("comment not updated.")
+    }
 }

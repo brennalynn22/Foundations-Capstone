@@ -1,5 +1,4 @@
 
-
 const recipeContainer= document.querySelector('#recipe-container')
 const form = document.querySelector('form')
 
@@ -7,11 +6,13 @@ const form = document.querySelector('form')
 const baseURL =`http://localhost:3030/api/recipes`
 
 const recipeCallback =({data:recipes}) => displayRecipes(recipes)
-const errCallback = err => console.log(err.response.data)
+const errCallback = err => console.log(err)
 
 const getAllRecipes = () => axios.get(baseURL).then(recipeCallback).catch(errCallback)
 const createRecipe = body => axios.post(baseURL, body).then(recipeCallback).catch((err)=>alert(err))
 const deleteRecipe = id => axios.delete(`${baseURL}/${id}`).then(recipeCallback).catch(errCallback)
+
+const updateComment= (id, body) => axios.put(`${baseURL}/${id}`,body).then(recipeCallback).catch(errCallback)
 
 function submitHandler(e){
     e.preventDefault()
@@ -23,25 +24,16 @@ function submitHandler(e){
     let ingredients = document.querySelector('#ingredients')
     let directions = document.querySelector('#directions')
 
+
     let bodyObj = {
         name: name.value,
         creator: creator.value, 
         ingredients: ingredients.value,
-        directions: directions.value
+        directions: directions.value,
+        comments:""
 
     }
-    // if (name.value === null) {
-    //     alert ('You must enter a name')
-    //     return
-    // } 
-    // if (ingredients.value === null){
-    //     alert ('You must enter the ingredients')
-    //     return
-    // }
-    // if (directions.value === null){
-    //     alert ('You must enter directions')
-    //     return
-    // }
+   
     createRecipe(bodyObj)
 
     name.value =''
@@ -53,24 +45,36 @@ function submitHandler(e){
 function createRecipeCard(recipe) {
     const recipeCard = document.createElement('div')
     recipeCard.classList.add('recipe-card')
-
+//split recipe into array, on array map forEach item in array mkae p tag for each 
     recipeCard.innerHTML = `<div class="recipeBody">
-    <p id="name2"><span id="title2">Recipe:   </span>${recipe.name}</p>
-    <p id="creator2"><span id="from2">From:   </span>${recipe.creator}</p>
-    <p id="ingredientsTemplate">Ingredients:</p>
-    <p id="ingredients2">${recipe.ingredients}</p>
-    <p id="directionsTemplate">Directions:</p>
-    <p id="directions2">${recipe.directions}</p>
+    <p class="name2" id="name2-${recipe.id}"><span class="title2" id="title2-${recipe.id}">Recipe:   </span>${recipe.name}</p>
+    <input type="checkbox" class="favoriteCheck" id="favoriteCheck-${recipe.id}
+    <p class="creator2" id="creator2-${recipe.id}"><span id="from2-${recipe.id}">From:   </span>${recipe.creator}</p>
+    <p class="ingredientsTemplate" id="ingredientsTemplate-${recipe.id}">Ingredients:</p>
+    <p class="ingredients2" id="ingredients2-${recipe.id}"></p>
+    <p class="directionsTemplate" id="directionsTemplate-${recipe.id}">Directions:</p>
+    <p class="directions2" id="directions2-${recipe.id}">${recipe.directions}</p>
+    
+     <div class="commentSection" id="commentSectionId">
+        <label for="newComment" id="commentHeader-${recipe.id}">Note:</label>
+       <textarea type="text"class="textareaComment" id="newComment-${recipe.id}" placeholder="Enter Note"></textarea>
+        <div id="allComments-${recipe.id}">${recipe.comments}</div>
+        
     </div>
-    <div id="commentSection"></div>
     <div class="btns-container">
         <button class="btns-container" id="editBtn-${recipe.id}" type="button">Edit Recipe</button>
-        <button id="commentBtn" onclick="addComment()">Comment</button>
+        <button id="commentBtn-${recipe.id}">Add Comment</button>
         <button onclick="deleteRecipe(${recipe.id})">Delete</button>
-    </div> 
+    </div>
+    </section> 
+    </div>
     `
+//select id with ingredients2-id, split recipe string into arrray by commma , for each itme in array make a p tag that has the text, then append to element I selecet with ingredients2-id
+
     recipeContainer.appendChild(recipeCard)
-    editBtn()
+    editBtn(recipe.id)
+    addComment(recipe.id)
+   
 }
 
 function displayRecipes(arr){
@@ -79,15 +83,16 @@ function displayRecipes(arr){
         createRecipeCard(arr[i])
     }
 }
+
 form.addEventListener('submit', submitHandler)
 
 
-function editBtn() {
+function editBtn(id) {
 
 
-const editBtn= document.querySelector('#editBtn-1');
-const editables = document.querySelectorAll('#name2, #creator2, #ingredients2, #directions2')
-console.log(editBtn)
+const editBtn= document.querySelector(`#editBtn-${id}`);
+const editables = document.querySelectorAll(`#name2-${id}, #creator2-${id}, #ingredients2-${id}, #directions2-${id}`)
+
 if(editBtn){
 editBtn.addEventListener('click', (e)=> {
     console.log(e.target)
@@ -97,8 +102,9 @@ editBtn.addEventListener('click', (e)=> {
     editables[2].contentEditable = 'true';
     editables[3].contentEditable = 'true';
     editBtn.innerHTML = 'Save Changes';
-    editBtn.style.backgroundColor ='rgb(61,61,91)';
-    editBtn.style.color= "rgb(244,241,222)";
+    editBtn.style.backgroundColor = 'rgb(129,178,154)';
+    editBtn.style.color='rgb(61,61,91)'
+    
 
    } else {
     //disable editing
@@ -108,7 +114,9 @@ editBtn.addEventListener('click', (e)=> {
     editables[3].contentEditable = 'false';
     //change button text and color
     editBtn.innerHTML= "Edit Recipe";
-    editBtn.style.backgroundColor = 'rgb(129,178,154)';
+    
+    editBtn.style.backgroundColor ='rgb(61,61,91)';
+    editBtn.style.color= "rgb(244,241,222)";
     //save the data in localStorage 
     for (let i=0; i<editables.length;i++){
         localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
@@ -118,14 +126,45 @@ editBtn.addEventListener('click', (e)=> {
 
 }
 )}}
+// let editedRecipeCard = JSON.parse(window.localStorage.getItem('editedRecipeCard'));
+// console.log(editedRecipeCard)
 
-function addComment (){
-    const x= document.getElementById("commentSection");
-    if (x.style.display === "none"){
-        x.style.display = "block";
-    } else { 
-        x.style.display = "none";
+// function addComment (){
+//     const comment= document.getElementById("commentSection");
+//     // comment.addEventListener("click", )
+//     const displaySetting= comment.style.display;
+//     const commentBtn= document.getElementById('commentBtn');
 
-    }
+//     if (comment.style.display === "none"){
+//         comment.style.display = "block";
+//     } else { 
+//         comment.style.display = "none";
+
+//     }
+// }
+
+
+function addComment(id) {
+
+ const commentContainer = document.getElementById(`allComments-${id}`);
+
+    
+    const textBox = document.createElement('div');
+    const wrapDiv = document.createElement('div');
+    wrapDiv.className = 'wrapper';
+    wrapDiv.style.marginLeft = 0;
+    let commentText = document.getElementById(`newComment-${id}`);
+    console.log(commentText.value)
+    
+    textBox.innerHTML = commentText.value;
+    document.getElementById(`newComment-${id}`).value = '';
+    wrapDiv.append(textBox);
+    commentContainer.appendChild(wrapDiv);
+    document.getElementById(`commentBtn-${id}`).addEventListener('click', function (ev) {
+        updateComment(id, {comments:commentText.value});
+      
+      });  
 }
+
+
 getAllRecipes()
