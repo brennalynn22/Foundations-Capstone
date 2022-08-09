@@ -105,6 +105,7 @@ button {
     border-radius:10px;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 .title2{
@@ -144,7 +145,7 @@ button {
 }
 
 .ingredients2 {
-    column-count:0;
+    column-count:2;
     font-family:'Courier New';
     font-size:15px;
 }
@@ -157,6 +158,8 @@ button {
 
 .btns-container {
     display: flex;
+    margin-top: 5px;
+    align-items: flex-end;
     justify-content: space-evenly;
 
 }
@@ -172,7 +175,4 @@ button {
 .textareaComment{
     width:80%;
     height:50px;
-}
-.favoriteCheck{
-    position:
 }

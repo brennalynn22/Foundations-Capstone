@@ -45,13 +45,13 @@ function submitHandler(e){
 function createRecipeCard(recipe) {
     const recipeCard = document.createElement('div')
     recipeCard.classList.add('recipe-card')
-//split recipe into array, on array map forEach item in array mkae p tag for each 
+    recipeCard.setAttribute("id", `${recipe.id}`)
+
     recipeCard.innerHTML = `<div class="recipeBody">
     <p class="name2" id="name2-${recipe.id}"><span class="title2" id="title2-${recipe.id}">Recipe:   </span>${recipe.name}</p>
-    <input type="checkbox" class="favoriteCheck" id="favoriteCheck-${recipe.id}
     <p class="creator2" id="creator2-${recipe.id}"><span id="from2-${recipe.id}">From:   </span>${recipe.creator}</p>
     <p class="ingredientsTemplate" id="ingredientsTemplate-${recipe.id}">Ingredients:</p>
-    <p class="ingredients2" id="ingredients2-${recipe.id}"></p>
+    <ul class="ingredients2" id="ingredients2-${recipe.id}"></ul>
     <p class="directionsTemplate" id="directionsTemplate-${recipe.id}">Directions:</p>
     <p class="directions2" id="directions2-${recipe.id}">${recipe.directions}</p>
     
@@ -63,7 +63,7 @@ function createRecipeCard(recipe) {
     </div>
     <div class="btns-container">
         <button class="btns-container" id="editBtn-${recipe.id}" type="button">Edit Recipe</button>
-        <button id="commentBtn-${recipe.id}">Add Comment</button>
+        <button id="commentBtn-${recipe.id}">Add Note</button>
         <button onclick="deleteRecipe(${recipe.id})">Delete</button>
     </div>
     </section> 
@@ -74,14 +74,31 @@ function createRecipeCard(recipe) {
     recipeContainer.appendChild(recipeCard)
     editBtn(recipe.id)
     addComment(recipe.id)
-   
+
+    console.log(document.getElementById(`ingredients2-${recipe.id}`))
+    let list = recipe.ingredients.split(',')
+        list.forEach(function(item, index){
+          let li = document.createElement('li')
+          li.textContent=item
+          
+          document.getElementById(`ingredients2-${recipe.id}`).appendChild(li)
+        })
 }
 
 function displayRecipes(arr){
     recipeContainer.innerHTML =``
-    for (let i=0; i< arr.length; i++){
-        createRecipeCard(arr[i])
-    }
+
+    // if( window.localStorage.getItem('1')){
+    // for (let i=0; i<window.localStorage.length; i++){
+    //     let recipe= window.localStorage.getItem(`${i+1}`)
+    //    createRecipeCard(recipe)
+    // }
+    // } else {
+        for (let i=0; i< arr.length; i++){
+            createRecipeCard(arr[i])
+        }
+    // }
+
 }
 
 form.addEventListener('submit', submitHandler)
@@ -118,16 +135,20 @@ editBtn.addEventListener('click', (e)=> {
     editBtn.style.backgroundColor ='rgb(61,61,91)';
     editBtn.style.color= "rgb(244,241,222)";
     //save the data in localStorage 
-    for (let i=0; i<editables.length;i++){
-        localStorage.setItem(editables[i].getAttribute('id'), editables[i].innerHTML);
+    
+  
+    for (let i=0; i<recipeContainer.childNodes.length;i++){
+        localStorage.setItem(recipeContainer.childNodes[i].id, recipeContainer.childNodes[i].innerHTML);
     }
 
    }
 
 }
 )}}
-// let editedRecipeCard = JSON.parse(window.localStorage.getItem('editedRecipeCard'));
-// console.log(editedRecipeCard)
+
+console.log(recipeContainer.childNodes)
+
+
 
 // function addComment (){
 //     const comment= document.getElementById("commentSection");
@@ -154,7 +175,6 @@ function addComment(id) {
     wrapDiv.className = 'wrapper';
     wrapDiv.style.marginLeft = 0;
     let commentText = document.getElementById(`newComment-${id}`);
-    console.log(commentText.value)
     
     textBox.innerHTML = commentText.value;
     document.getElementById(`newComment-${id}`).value = '';
