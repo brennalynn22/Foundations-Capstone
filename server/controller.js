@@ -7,7 +7,6 @@ module.exports = {
     },
 
     createRecipe:(req, res) => {
-        // console.log(req.body) //what is this doing?
         const{name, creator, ingredients, directions}=req.body;
         let newRecipe = {
             id:globalID,
@@ -34,7 +33,6 @@ module.exports = {
     },
 
     updateComment: (req, res) => {
-////select id and edit property
      let index =recipes.findIndex(elem => elem.id=== +req.params.id)
      let newComment =req.body.comments
      console.log(req.body)
@@ -45,7 +43,6 @@ module.exports = {
                 recipes[index].comments +=", " + newComment
             }
 
-            
             console.log(recipes[index])
             res.status(200).send(recipes)
             return

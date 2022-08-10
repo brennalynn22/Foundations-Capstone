@@ -69,8 +69,6 @@ function createRecipeCard(recipe) {
     </section> 
     </div>
     `
-//select id with ingredients2-id, split recipe string into arrray by commma , for each itme in array make a p tag that has the text, then append to element I selecet with ingredients2-id
-
     recipeContainer.appendChild(recipeCard)
     editBtn(recipe.id)
     addComment(recipe.id)
@@ -87,17 +85,9 @@ function createRecipeCard(recipe) {
 
 function displayRecipes(arr){
     recipeContainer.innerHTML =``
-
-    // if( window.localStorage.getItem('1')){
-    // for (let i=0; i<window.localStorage.length; i++){
-    //     let recipe= window.localStorage.getItem(`${i+1}`)
-    //    createRecipeCard(recipe)
-    // }
-    // } else {
         for (let i=0; i< arr.length; i++){
             createRecipeCard(arr[i])
         }
-    // }
 
 }
 
@@ -121,49 +111,27 @@ editBtn.addEventListener('click', (e)=> {
     editBtn.innerHTML = 'Save Changes';
     editBtn.style.backgroundColor = 'rgb(129,178,154)';
     editBtn.style.color='rgb(61,61,91)'
-    
 
    } else {
-    //disable editing
+    
     editables[0].contentEditable = 'false';
     editables[1].contentEditable = 'false';
     editables[2].contentEditable = 'false';
     editables[3].contentEditable = 'false';
-    //change button text and color
+    
     editBtn.innerHTML= "Edit Recipe";
     
     editBtn.style.backgroundColor ='rgb(61,61,91)';
     editBtn.style.color= "rgb(244,241,222)";
-    //save the data in localStorage 
-    
-  
+   
     for (let i=0; i<recipeContainer.childNodes.length;i++){
         localStorage.setItem(recipeContainer.childNodes[i].id, recipeContainer.childNodes[i].innerHTML);
     }
-
    }
-
 }
 )}}
 
 console.log(recipeContainer.childNodes)
-
-
-
-// function addComment (){
-//     const comment= document.getElementById("commentSection");
-//     // comment.addEventListener("click", )
-//     const displaySetting= comment.style.display;
-//     const commentBtn= document.getElementById('commentBtn');
-
-//     if (comment.style.display === "none"){
-//         comment.style.display = "block";
-//     } else { 
-//         comment.style.display = "none";
-
-//     }
-// }
-
 
 function addComment(id) {
 

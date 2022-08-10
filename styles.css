@@ -15,7 +15,7 @@ body {
 }
 #title {
     margin:0px;
-    padding: 17px;
+    padding: 15px;
     text-align: center;
     justify-content: center;
     color: rgb(61,61,91);
@@ -51,12 +51,13 @@ form {
 #recipeHeader {
     display:inline-flex;
     flex-direction: row;
-    font-size: 35px;
+    font-size: 45px;
     font-family:"lobster";
 }
+
 input{
     width:250px;
-    display:inline-flex
+    
 }
 .textareaContainer {
     width:570px;
@@ -67,6 +68,7 @@ label{
     font-family: 'Courier New', Courier, monospace;
     clear: both;
     float:left;
+    display: inline-block
     margin-right:15px
 
 }
@@ -80,7 +82,7 @@ button {
     background-color:rgb(61,61,91);
     font-family: "Courier New";
     font-weight: 550;
-    align-content: center;
+    align-content:center;
     position: center;
     justify-content:space-evenly;
 
@@ -112,7 +114,7 @@ button {
     margin: 5px;
     font-family: "lobster";
     font-weight: 500;
-    font-size: 35px;
+    font-size: 45px;
     
 }
 .name2 {
