@@ -1,4 +1,5 @@
 [
+   
     {
         "id":1,
         "name": "Grandma's French Toast",
@@ -7,7 +8,7 @@
         "directions": "1. Melt margarine in 9 x 13 pan 2. Mix the brown sugar and cinnamon with the margarine, press the mix down and cover the whole bottom of the pan with the mix 3. In a separate bowl, mix together the eggs, milk, and salt 4. place the slices of bread in stacks of 2 onto the butter sugar mix 5. Pour the egg/milk mixture on top of the bread 6. Cover overnight in the fridge. 7. Bake uncovered at 300 F for 35-45 min",
         "comments": ""
     },
-
+       
     {
         "id":2,
         "name":"Banana Bread",
@@ -17,15 +18,24 @@
         "comments": ""
 
     },
-
+   
     {
         "id":3,
+        "name":"Med. White Sauce",
+        "creator": "Mom",
+        "ingredients":"2 Tbsp butter/margarine, 2 Tbsp flour, 1/4 tsp salt, 1/8 tsp pepper, 1 cup milk, 3 hard boiled eggs",
+        "directions": "Makes 1 cup.  1. Melt butter in a saucepan over low heat. Blend in flour, salt and pepper. Cook over low heat, stirring until mixture is smooth and bubbly. Remove from heat. 2. Stir in milk, heat to boiling, stirring constantly 3. Boil and stir for 1 min 4.  Peel and dice hard-boiled eggs 5. Mix eggs into white sauce.",
+        "comments": ""
+    },
+    {
+        "id":4,
         "name":"Zucchini Bread",
         "creator": "Kelsey's great grandmother, Elda Ross",
         "ingredients":"3 eggs, 2 cups sugar, 1 cup oil, 3 cup flour, 2 cup grated zucchini, 1 tsp salt, 1 tsp soda, 1/4 baking powder, 3 tsp cinnamon, 1 cup chopped nuts(optional)",
         "directions":"Makes 2 loaves. 1. Prepare pans with non-stick spray 2. eggs, sugar, oil and flour until smooth 3. Mix in the remaining ingredients 4. Bake at 325 F for 1 hour",
         "comments": ""
     }
+    
     
 
 ]

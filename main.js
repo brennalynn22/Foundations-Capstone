@@ -48,7 +48,7 @@ function createRecipeCard(recipe) {
     recipeCard.setAttribute("id", `${recipe.id}`)
 
     recipeCard.innerHTML = `<div class="recipeBody">
-    <p class="name2" id="name2-${recipe.id}"><span class="title2" id="title2-${recipe.id}">Recipe:   </span>${recipe.name}</p>
+    <p class="name2" id="name2-${recipe.id}"><span class="title2" id="title2-${recipe.id}">Recipe: </span> ${recipe.name}</p>
     <p class="creator2" id="creator2-${recipe.id}"><span id="from2-${recipe.id}">From:   </span>${recipe.creator}</p>
     <p class="ingredientsTemplate" id="ingredientsTemplate-${recipe.id}">Ingredients:</p>
     <ul class="ingredients2" id="ingredients2-${recipe.id}"></ul>
@@ -56,8 +56,8 @@ function createRecipeCard(recipe) {
     <p class="directions2" id="directions2-${recipe.id}">${recipe.directions}</p>
     
      <div class="commentSection" id="commentSectionId">
-        <label for="newComment" id="commentHeader-${recipe.id}">Note:</label>
-       <textarea type="text"class="textareaComment" id="newComment-${recipe.id}" placeholder="Enter Note"></textarea>
+        <p for="newComment" class="commentHeader" id="commentHeader-${recipe.id}">Note:</p>
+       <textarea type="text"class="textareaComment" id="newComment-${recipe.id}" placeholder="Enter note..."></textarea>
         <div id="allComments-${recipe.id}">${recipe.comments}</div>
         
     </div>

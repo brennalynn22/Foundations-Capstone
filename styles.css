@@ -38,6 +38,8 @@ form {
     width:600px;
     height: 400px;
     padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 10px;
     background-color: rgb(242,204,143);
     position: center;
     display: flex;
@@ -49,14 +51,13 @@ form {
 }
 
 #recipeHeader {
-    display:inline-flex;
-    flex-direction: row;
+    padding:5px;
     font-size: 45px;
     font-family:"lobster";
 }
 
 input{
-    width:250px;
+    width:300px;
     
 }
 .textareaContainer {
@@ -65,17 +66,17 @@ input{
    
 }
 label{
+    padding:5px;
     font-family: 'Courier New', Courier, monospace;
     clear: both;
-    float:left;
-    display: inline-block
+    display: inline-block;
     margin-right:15px
 
 }
 
 button {
     border:1px;
-    margin: 0px;
+    margin: 15px;
     padding: 5px;
     border-radius: 5px;
     color: rgb(244,241, 222);
@@ -83,7 +84,6 @@ button {
     font-family: "Courier New";
     font-weight: 550;
     align-content:center;
-    position: center;
     justify-content:space-evenly;
 
 
@@ -101,17 +101,21 @@ button {
 
 .recipe-card {
     margin:10px;
-    padding: 15px;
+    padding-right: 20px;
+    padding-top: 0px;
+    padding-left: 25px;
+    padding-bottom: 10px;
     width:500px;
     background-color: rgb(242,204,143);
     border-radius:10px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    
 }
 
 .title2{
-    margin: 5px;
     font-family: "lobster";
     font-weight: 500;
     font-size: 45px;
@@ -137,12 +141,12 @@ button {
 }
 .ingredientsTemplate {
     font-family: "Courier New";
-    font-weight: 500;
+    font-weight: 600;
     font-size: 15px;
 }
 .directionsTemplate {
     font-family: "Courier New";
-    font-weight: 500;
+    font-weight: 600;
     font-size: 15px;
 }
 
@@ -152,15 +156,14 @@ button {
     font-size:15px;
 }
 .directions2 {
-    column-count:0;
     font-family:'Courier New';
     font-size:15px;
+    line-height: 1.4;
 
 }
 
 .btns-container {
     display: flex;
-    margin-top: 5px;
     align-items: flex-end;
     justify-content: space-evenly;
 
@@ -169,12 +172,13 @@ button {
     font-family:'Courier New';
     font-size:15px;
 }
-#commentHeader {
+.commentHeader {
     font-family: 'Courier New', Courier, monospace;
-    font-size: large;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .textareaComment{
-    width:80%;
+    width:98%;
     height:50px;
 }
